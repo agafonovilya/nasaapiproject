@@ -5,12 +5,7 @@
     android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
-    android:background="@color/colorBottomSheetBackground"
-    app:behavior_hideable="false"
-    app:behavior_peekHeight="100dp"
-    android:visibility="visible"
+    style="?attr/bottomSheetStyle"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <View
