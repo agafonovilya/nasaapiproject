@@ -16,7 +16,7 @@
             android:paddingEnd="10dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_layout"
+                android:id="@+id/pod_fragment_input_layout"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:hint="@string/search_wiki"
@@ -24,19 +24,19 @@
                 app:endIconDrawable="@drawable/ic_wikipedia"
                 app:endIconMode="custom"
                 app:helperText="@string/wiki_helper_text"
-                app:layout_constraintBottom_toTopOf="@+id/image_view"
+                app:layout_constraintBottom_toTopOf="@+id/pod_fragment_image_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/input_edit_text"
+                    android:id="@+id/pod_fragment_input_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ru.geekbrains.nasaapiproject.util.EquilateralImageView
-                android:id="@+id/image_view"
+                android:id="@+id/pod_fragment_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -48,7 +48,7 @@
                 app:srcCompat="@drawable/ic_no_photo_vector" />
 
             <WebView
-                android:id="@+id/webView"
+                android:id="@+id/pod_fragment_webview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"

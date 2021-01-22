@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_pod.*
 import ru.geekbrains.nasaapiproject.R
 import ru.geekbrains.nasaapiproject.ui.pod.PictureOfTheDayData
 import ru.geekbrains.nasaapiproject.ui.pod.PictureOfTheDayViewModel
@@ -29,7 +29,7 @@ class PictureOfTheDayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_pod, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,11 +37,12 @@ class PictureOfTheDayFragment : Fragment() {
 
         viewModel.getData()
                 .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
+
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
 
-        input_layout.setEndIconOnClickListener {
+        pod_fragment_input_layout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://en.wikipedia.org/wiki/${input_edit_text.text.toString()}")
+                data = Uri.parse("https://en.wikipedia.org/wiki/${pod_fragment_input_edit_text.text.toString()}")
             })
         }
     }
@@ -63,13 +64,13 @@ class PictureOfTheDayFragment : Fragment() {
                 } else {
                     //showSuccess()
                         if(serverResponseData.mediaType == "video") {
-                           webView.clearCache(true)
-                            webView.clearHistory()
-                            webView.settings.javaScriptEnabled = true
-                            webView.settings.javaScriptCanOpenWindowsAutomatically = true
-                            webView.loadUrl(url)
+                            pod_fragment_webview.clearCache(true)
+                            pod_fragment_webview.clearHistory()
+                            pod_fragment_webview.settings.javaScriptEnabled = true
+                            pod_fragment_webview.settings.javaScriptCanOpenWindowsAutomatically = true
+                            pod_fragment_webview.loadUrl(url)
                         } else {
-                            image_view.load(url) {
+                            pod_fragment_image_view.load(url) {
                                 lifecycle(this@PictureOfTheDayFragment)
                                 error(R.drawable.ic_load_error_vector)
                                 placeholder(R.drawable.ic_no_photo_vector)

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup_theme"
+        android:id="@+id/setting_fragment_chipGroup_theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,7 +18,7 @@
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:id="@+id/chip_light"
+            android:id="@+id/setting_fragment_chip_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/light"
@@ -26,7 +26,7 @@
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:id="@+id/chip_night"
+            android:id="@+id/setting_fragment_chip_night"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/night"

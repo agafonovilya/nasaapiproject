@@ -22,13 +22,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         super.onCreate(savedInstanceState)
 
-        bottom_navigation_view.setOnNavigationItemSelectedListener { item ->
+        main_activity_bottom_navigation_view.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_item_pod -> if (selectedFragment?.javaClass != PictureOfTheDayFragment::class.java) {
                     selectedFragment = PictureOfTheDayFragment.newInstance()
                 }
-                R.id.menu_item_other -> if (selectedFragment?.javaClass != ItemTwoFragment::class.java) {
-                    selectedFragment = ItemTwoFragment.newInstance()
+                R.id.menu_item_other -> if (selectedFragment?.javaClass != ContainerForRandomlyPictureFragment::class.java) {
+                    selectedFragment = ContainerForRandomlyPictureFragment.newInstance()
                 }
                 R.id.menu_item_settings -> if (selectedFragment?.javaClass != SettingsFragment::class.java){
                     selectedFragment = SettingsFragment.newInstance()
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.frame_layout, fragment)
+                .replace(R.id.main_activity_container, fragment)
                 .commit()
     }
 }
