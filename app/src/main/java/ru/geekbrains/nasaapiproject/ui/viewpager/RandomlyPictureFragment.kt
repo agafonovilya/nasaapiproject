@@ -19,7 +19,7 @@ class RandomlyPictureFragment: Fragment(R.layout.fragment_randomly_picture) {
         arguments?.let { setText(it.getString("description", "no description")) }
     }
 
-    fun setImage(url:String){
+    private fun setImage(url:String){
         randomly_fragment_image_view.load(url) {
             lifecycle(this@RandomlyPictureFragment)
             error(R.drawable.ic_load_error_vector)
@@ -27,7 +27,7 @@ class RandomlyPictureFragment: Fragment(R.layout.fragment_randomly_picture) {
         }
     }
 
-    fun setText(text: String){
+    private fun setText(text: String){
         randomly_fragment_text_view.text = text
     }
 }
