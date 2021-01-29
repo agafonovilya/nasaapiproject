@@ -37,16 +37,18 @@ class ContainerForRandomlyPictureFragment : Fragment(R.layout.fragment_container
         when (data) {
             is RandomlyPictureData.Success -> {
                 val date: ArrayList<String> = ArrayList()
+                val title: ArrayList<String> = ArrayList()
                 val imageUrl: ArrayList<String> = ArrayList()
                 val description: ArrayList<String> = ArrayList()
 
                 data.serverResponseData.forEach {
                     it.date?.let { it1 -> date.add(it1) }
+                    it.title?.let { it1 -> title.add(it1) }
                     it.url?.let { it1 -> imageUrl.add(it1)}
                     it.explanation?.let { it1 -> description.add(it1) }
                 }
 
-                view_pager.adapter = ViewPagerAdapter(childFragmentManager, date, imageUrl, description)
+                view_pager.adapter = ViewPagerAdapter(childFragmentManager, date, title, imageUrl, description)
                 tab_layout.setupWithViewPager(view_pager)
 
             }

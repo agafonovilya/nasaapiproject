@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 
 class ViewPagerAdapter(fragmentManager: FragmentManager,
                        private val date: ArrayList<String>,
+                       private val title: ArrayList<String>,
                        private val imageUrl: ArrayList<String>,
                        private val description: ArrayList<String>) :
         FragmentStatePagerAdapter(fragmentManager) {
@@ -14,6 +15,7 @@ class ViewPagerAdapter(fragmentManager: FragmentManager,
 
     override fun getItem(position: Int): Fragment {
         val arguments = Bundle()
+        arguments.putString("title", title[position])
         arguments.putString("description", description[position])
         arguments.putString("imageUrl", imageUrl[position])
 

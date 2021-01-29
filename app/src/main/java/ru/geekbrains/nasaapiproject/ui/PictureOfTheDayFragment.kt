@@ -3,7 +3,12 @@ package ru.geekbrains.nasaapiproject.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.ChangeImageTransform
+import android.transition.TransitionManager
+import android.transition.TransitionSet
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -18,6 +23,8 @@ import ru.geekbrains.nasaapiproject.ui.pod.PictureOfTheDayData
 import ru.geekbrains.nasaapiproject.ui.pod.PictureOfTheDayViewModel
 
 class PictureOfTheDayFragment : Fragment() {
+
+    private var isExpanded = false
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
@@ -44,6 +51,27 @@ class PictureOfTheDayFragment : Fragment() {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse("https://en.wikipedia.org/wiki/${pod_fragment_input_edit_text.text.toString()}")
             })
+        }
+
+        setImageZoomClickListener()
+
+    }
+
+    private fun setImageZoomClickListener() {
+        pod_fragment_image_view.setOnClickListener {
+            isExpanded = !isExpanded
+            TransitionManager.beginDelayedTransition(
+                main, TransitionSet()
+                    .addTransition(ChangeBounds())
+                    .addTransition(ChangeImageTransform())
+            )
+
+            val params: ViewGroup.LayoutParams = pod_fragment_image_view.layoutParams
+            params.height =
+                if (isExpanded) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+            pod_fragment_image_view.layoutParams = params
+            pod_fragment_image_view.scaleType =
+                if (isExpanded) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
         }
     }
 

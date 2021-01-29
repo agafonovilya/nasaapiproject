@@ -1,5 +1,6 @@
 package ru.geekbrains.nasaapiproject.ui
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -41,6 +42,16 @@ class SettingsFragment: Fragment(R.layout.fragment_settings) {
                     }
                 }
             }
+        }
+
+        animateChipGroup()
+
+    }
+
+    private fun animateChipGroup() {
+        with(ObjectAnimator.ofFloat(setting_fragment_chipGroup_theme, "rotation", 0f, 360f)) {
+            duration = 1000
+            start()
         }
     }
 }

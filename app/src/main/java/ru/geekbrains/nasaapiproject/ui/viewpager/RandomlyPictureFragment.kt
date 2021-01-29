@@ -15,11 +15,18 @@ class RandomlyPictureFragment: Fragment(R.layout.fragment_randomly_picture) {
         super.onViewCreated(view, savedInstanceState)
 
         val arguments =  arguments
-        arguments?.let {setImage(it.getString("imageUrl", ""))}
+        arguments?.let { setTitle(it.getString("title", "")) }
+        arguments?.let { setImage(it.getString("imageUrl", "")) }
         arguments?.let { setText(it.getString("description", "no description")) }
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            randomly_fragment_scroll_view.setOnScrollChangeListener { _, _, _, _, _ ->
+                randomly_fragment_title_header.isSelected = randomly_fragment_scroll_view.canScrollVertically(-1)
+            }
+        }
     }
 
-    private fun setImage(url:String){
+    private fun setImage(url:String) {
         randomly_fragment_image_view.load(url) {
             lifecycle(this@RandomlyPictureFragment)
             error(R.drawable.ic_load_error_vector)
@@ -27,7 +34,11 @@ class RandomlyPictureFragment: Fragment(R.layout.fragment_randomly_picture) {
         }
     }
 
-    private fun setText(text: String){
+    private fun setText(text: String) {
         randomly_fragment_text_view.text = text
+    }
+
+    private fun setTitle(text: String) {
+        randomly_fragment_title.text = text
     }
 }
