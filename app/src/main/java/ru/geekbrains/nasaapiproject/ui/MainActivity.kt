@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.geekbrains.nasaapiproject.R
+import ru.geekbrains.nasaapiproject.ui.notes.NotesFragment
 import ru.geekbrains.nasaapiproject.ui.preferences.AppSharedPreferences
 import ru.geekbrains.nasaapiproject.ui.preferences.SharedPrefValue
 
@@ -29,6 +30,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 }
                 R.id.menu_item_other -> if (selectedFragment?.javaClass != ContainerForRandomlyPictureFragment::class.java) {
                     selectedFragment = ContainerForRandomlyPictureFragment.newInstance()
+                }
+                R.id.menu_item_notes -> if (selectedFragment?.javaClass != NotesFragment::class.java){
+                    selectedFragment = NotesFragment.newInstance()
                 }
                 R.id.menu_item_settings -> if (selectedFragment?.javaClass != SettingsFragment::class.java){
                     selectedFragment = SettingsFragment.newInstance()

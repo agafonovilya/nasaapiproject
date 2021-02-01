@@ -11,6 +11,11 @@
         android:icon="@drawable/ic_baseline_workspaces_24"
         android:title="@string/other"/>
     <item
+        android:id="@+id/menu_item_notes"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_notes_24"
+        android:title="@string/notes"/>
+    <item
         android:id="@+id/menu_item_settings"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_settings_24"
