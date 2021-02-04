@@ -3,6 +3,11 @@ package ru.geekbrains.nasaapiproject.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.LeadingMarginSpan
+import android.text.style.URLSpan
 import android.transition.ChangeBounds
 import android.transition.ChangeImageTransform
 import android.transition.TransitionManager
@@ -105,8 +110,8 @@ class PictureOfTheDayFragment : Fragment() {
                             }
                         }
 
-                    bottom_sheet_description_header.text = serverResponseData.title
-                    bottom_sheet_description.text = serverResponseData.explanation
+                    setLinkedTitle(serverResponseData.title)
+                    setDescription(serverResponseData.explanation)
                 }
             }
             is PictureOfTheDayData.Loading -> {
@@ -119,6 +124,32 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
+    private fun setDescription(description: String?) {
+        description?.let {
+            val spannableString = SpannableString(it)
+            spannableString.setSpan(
+                    LeadingMarginSpan.Standard(100, 0),
+                    0,
+                    it.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            bottom_sheet_description.text = spannableString
+        }
+    }
+
+    private fun setLinkedTitle(title: String?) {
+        title?.let {
+            val spannableString = SpannableString(it)
+            spannableString.setSpan(
+                    URLSpan("https://en.wikipedia.org/wiki/${it}"),
+                    0,
+                    it.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            bottom_sheet_description_header.text = spannableString
+            bottom_sheet_description_header.movementMethod = LinkMovementMethod.getInstance()
+        }
+    }
 
     private fun Fragment.toast(string: String?) {
         Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
