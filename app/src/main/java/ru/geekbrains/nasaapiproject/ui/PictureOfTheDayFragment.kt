@@ -1,6 +1,7 @@
 package ru.geekbrains.nasaapiproject.ui
 
 import android.content.Intent
+import android.graphics.text.LineBreaker
 import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
@@ -133,6 +134,9 @@ class PictureOfTheDayFragment : Fragment() {
                     it.length,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                bottom_sheet_description.justificationMode = LineBreaker.JUSTIFICATION_MODE_INTER_WORD
+            }
             bottom_sheet_description.text = spannableString
         }
     }
