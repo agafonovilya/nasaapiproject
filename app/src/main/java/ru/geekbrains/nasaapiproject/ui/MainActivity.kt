@@ -5,23 +5,37 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.geekbrains.nasaapiproject.R
+import ru.geekbrains.nasaapiproject.ui.notes.NotesFragment
+import ru.geekbrains.nasaapiproject.ui.preferences.AppSharedPreferences
+import ru.geekbrains.nasaapiproject.ui.preferences.SharedPrefValue
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private var selectedFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        bottom_navigation_view.setOnNavigationItemSelectedListener { item ->
+        when(AppSharedPreferences().getSavedTheme()) {
+            SharedPrefValue.THEME_LIGHT -> setTheme(R.style.Theme_NasaApiProject_Light)
+            SharedPrefValue.THEME_NIGHT -> setTheme(R.style.Dark)
+        }
+
+        super.onCreate(savedInstanceState)
+
+        main_activity_bottom_navigation_view.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.page_1 -> if (selectedFragment?.javaClass != PictureOfTheDayFragment::class.java) {
+                R.id.menu_item_pod -> if (selectedFragment?.javaClass != PictureOfTheDayFragment::class.java) {
                     selectedFragment = PictureOfTheDayFragment.newInstance()
                 }
-                R.id.page_2 -> if(selectedFragment?.javaClass != ItemTwoFragment::class.java) {
-                    selectedFragment = ItemTwoFragment.newInstance()
+                R.id.menu_item_other -> if (selectedFragment?.javaClass != ContainerForRandomlyPictureFragment::class.java) {
+                    selectedFragment = ContainerForRandomlyPictureFragment.newInstance()
+                }
+                R.id.menu_item_notes -> if (selectedFragment?.javaClass != NotesFragment::class.java){
+                    selectedFragment = NotesFragment.newInstance()
+                }
+                R.id.menu_item_settings -> if (selectedFragment?.javaClass != SettingsFragment::class.java){
+                    selectedFragment = SettingsFragment.newInstance()
                 }
             }
             selectedFragment?.let { replaceFragment(it) }
@@ -38,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.frame_layout, fragment)
+                .replace(R.id.main_activity_container, fragment)
                 .commit()
     }
 }

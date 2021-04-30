@@ -7,10 +7,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.geekbrains.nasaapiproject.BuildConfig
+import ru.geekbrains.nasaapiproject.ui.api.PodRetrofitImpl
+import ru.geekbrains.nasaapiproject.ui.api.PodServerResponseData
 
 class PictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData(),
-    private val retrofitImpl: PODRetrofitImpl = PODRetrofitImpl()
+    private val retrofitImpl: PodRetrofitImpl = PodRetrofitImpl()
 ) :
     ViewModel() {
 
@@ -26,10 +28,10 @@ class PictureOfTheDayViewModel(
             PictureOfTheDayData.Error(Throwable("You need API key"))
         } else {
             retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(object :
-                Callback<PODServerResponseData> {
+                Callback<PodServerResponseData> {
                 override fun onResponse(
-                    call: Call<PODServerResponseData>,
-                    response: Response<PODServerResponseData>
+                        call: Call<PodServerResponseData>,
+                        response: Response<PodServerResponseData>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
                         liveDataForViewToObserve.value =
@@ -46,7 +48,7 @@ class PictureOfTheDayViewModel(
                     }
                 }
 
-                override fun onFailure(call: Call<PODServerResponseData>, t: Throwable) {
+                override fun onFailure(call: Call<PodServerResponseData>, t: Throwable) {
                     liveDataForViewToObserve.value = PictureOfTheDayData.Error(t)
                 }
             })

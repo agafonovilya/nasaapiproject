@@ -1,0 +1,59 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Dark application theme. -->
+    <style name="Dark" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowBackground">#454545</item>
+
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationViewDark</item>
+        <item name="bottomSheetStyle">@style/bottom_sheet_style_dark</item>
+        <item name="textInputStyle"> @style/Widget.App.TextInputLayoutDark</item>
+    </style>
+
+    <!-- Bottom Navigation View style -->
+    <style name="Widget.App.BottomNavigationViewDark" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationViewDark</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationViewDark" parent="">
+        <item name="backgroundTint">@color/color_dark_gray</item>
+        <item name="colorOnPrimary">@color/colorPrimary</item>
+    </style>
+
+    <!-- Text input layout style-->
+    <style name="Widget.App.TextInputLayoutDark" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/search_text_input_box_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/search_text_input_box_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/search_text_input_box_corner_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/search_text_input_box_corner_radius</item>
+        <item name="counterEnabled">true</item>
+        <item name="counterMaxLength">20</item>
+        <!-- Атрибуты ниже работают-->
+        <item name="endIconTint">@color/white</item>
+        <item name="helperTextTextColor">@color/white</item>
+        <item name="counterTextColor">@color/white</item>
+        <!-- Атрибуты ниже НЕ работают-->
+        <item name="hintTextColor">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="strokeColor">@color/white</item>
+    </style>
+
+    <!-- Bottom sheet style -->
+    <style name="bottom_sheet_style_dark" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="behavior_hideable">false</item>
+        <item name="behavior_peekHeight">100dp</item>
+        <item name="android:visibility">visible</item>
+        <!-- Атрибуты ниже НЕ работают на устройстве, хотя в студии отображается нужный фон.
+        И если этот атрибут указывать в самом layout в bottom sheet, то фон меняется-->
+        <item name="android:background">@color/colorBottomSheetBackground</item>
+    </style>
+
+
+</resources>
